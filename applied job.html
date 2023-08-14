@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="navbar">
+        <div><a href="week4 class4.html">Home</a></div>
+        <div><a href="applied job.html">Applied jobs</a></div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <main>
+        <table>
+            <thead>
+                <tr id="table">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job Applied</th>
+                    <th>Salary expected</th>
+                    <th>Add To Bookmark</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+
+
+            </tbody>
+        </table>
+    </main>
+    
+</body>
+</html>
+<style>
+#table{
+    background-color: aquamarine;
+   height: 80px;
+   
+
+}
+
+
+    #body{
+        background-color: aqua;
+        border: solid red;
+        height: 50px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+        
+       
+        
+    }
+
+</style>
+<script>
+
+ 
+
+    var jobArr=JSON.parse(localStorage.getItem("jobList"))
+    console.log(jobArr);
+    
+ var bookArr=JSON.parse(localStorage.getItem("bookdata"))
+
+
+    displayData(jobArr);
+ 
+    function displayData(yp){
+
+    yp.forEach( function (elem){
+       
+
+        var tr=document.createElement("tr");
+
+        var td1=document.createElement("td");
+        td1.innerText=elem.name;
+
+        var td2=document.createElement("td");
+        td2.innerText=elem.email;
+
+        var jobapp=document.createElement("td");
+        jobapp.innerText=elem.jobtype;
+
+        var expected=document.createElement("td");
+        expected.innerText=elem.money;
+
+        var book=document.createElement("td");
+        book.innerText="Bookmark";
+        book.style.color="blue"
+        book.style.cursor="pointer"
+        book.addEventListener("click", function(){
+            localFun(elem);
+        });
+
+       tr.append(td1,td2,jobapp,expected,book);
+       document.querySelector("tbody").append(tr);
+
+    });}
+
+    function localFun(elem){
+        console.log(elem);
+      bookArr.push(elem);
+        
+        localStorage.setItem("bookdata",JSON.stringify(bookArr));
+
+    }
+</script>
